@@ -19,6 +19,7 @@ const render = function (
   const reactElement = React.createElement(componentClass, props);
   const root = createRoot(target);
   root.render(reactElement);
+  console.log("Test");
   return [props, root];
 };
 
