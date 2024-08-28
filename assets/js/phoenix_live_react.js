@@ -18,7 +18,6 @@ const render = function (
   }
   const reactElement = React.createElement(componentClass, props);
   target.rootRenderer.render(reactElement);
-  console.log("Test");
   return props;
 };
 
@@ -34,7 +33,6 @@ const initLiveReactElement = function (el, additionalProps) {
     },
     window
   );
-  console.log({ target });
   render(el, target, componentClass, additionalProps);
   return { target: target, componentClass: componentClass };
 };
