@@ -52,7 +52,7 @@ const LiveReact = {
     const pushEventTo = this.pushEventTo && this.pushEventTo.bind(this);
     const handleEvent = this.handleEvent && this.handleEvent.bind(this);
     const { target, componentClass } = initLiveReactElement(el, { pushEvent });
-    const props = render(el, root, componentClass, {
+    const props = render(el, target, componentClass, {
       pushEvent,
       pushEventTo,
       handleEvent,
