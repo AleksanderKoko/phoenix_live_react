@@ -65,7 +65,7 @@ const LiveReact = {
     const pushEventTo = this.pushEventTo && this.pushEventTo.bind(this);
     const handleEvent = this.handleEvent;
     const previousProps = this.props;
-    const props = render(
+    const [props] = render(
       el,
       target,
       componentClass,
