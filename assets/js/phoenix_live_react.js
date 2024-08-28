@@ -34,6 +34,7 @@ const initLiveReactElement = function (el, additionalProps) {
     },
     window
   );
+  console.log({ target });
   render(el, target, componentClass, additionalProps);
   return { target: target, componentClass: componentClass };
 };
