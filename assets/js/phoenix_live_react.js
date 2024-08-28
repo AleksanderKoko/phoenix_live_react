@@ -17,14 +17,16 @@ const render = function (
     props = { ...props, ...additionalProps };
   }
   const reactElement = React.createElement(componentClass, props);
-  const root = createRoot(target);
-  root.render(reactElement);
+  target.rootRenderer.render(reactElement);
   console.log("Test");
-  return [props, root];
+  return props;
 };
 
 const initLiveReactElement = function (el, additionalProps) {
   const target = el.nextElementSibling;
+  if (target.rootRenderer === null) {
+    target.rootRenderer = createRoot(target);
+  }
   const componentClass = Array.prototype.reduce.call(
     el.dataset.liveReactClass.split("."),
     (acc, el) => {
@@ -50,12 +52,11 @@ const LiveReact = {
     const pushEventTo = this.pushEventTo && this.pushEventTo.bind(this);
     const handleEvent = this.handleEvent && this.handleEvent.bind(this);
     const { target, componentClass } = initLiveReactElement(el, { pushEvent });
-    const [props, root] = render(el, target, componentClass, {
+    const props = render(el, root, componentClass, {
       pushEvent,
       pushEventTo,
       handleEvent,
     });
-    this.root = root;
     if (el.dataset.liveReactMerge) this.props = props;
     Object.assign(this, { target, componentClass });
   },
@@ -78,7 +79,7 @@ const LiveReact = {
 
   destroyed() {
     const { target } = this;
-    this.root.unmount();
+    target.rootRenderer.unmount();
   },
 };
 
