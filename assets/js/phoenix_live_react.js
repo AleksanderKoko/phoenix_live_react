@@ -24,7 +24,7 @@ const render = function (
 
 const initLiveReactElement = function (el, additionalProps) {
   const target = el.nextElementSibling;
-  if (target.rootRenderer === null) {
+  if (!target.rootRenderer) {
     target.rootRenderer = createRoot(target);
   }
   const componentClass = Array.prototype.reduce.call(
